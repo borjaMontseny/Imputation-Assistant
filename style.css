@@ -36,10 +36,10 @@ input[type="date"] {
     box-sizing: border-box;
 }
 
-input[type=submit] {
+button {
     font-family: 'JetBrains Mono', monospace;
 }
 
-input[type="submit"]:hover {
+button:hover {
     font-weight: bold;
 }
