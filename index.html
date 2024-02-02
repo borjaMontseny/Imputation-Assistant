@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Asistente SIH</title>
+</head>
+
+<body>
+    <h1>Asistente SIH</h1>
+    <table>
+        <tr>
+            <td><label for="horasJornada">¿De cuántas horas es tu jornada laboral?</label></td>
+            <td><input type="number" id="horasJornada" name="horasJornada" min="3" max="8" value="5"></td>
+        </tr>
+        <tr>
+            <td><label for="diaFinImputacion">¿Cuando acaba tu periodo de imputación?</label></td>
+            <td><input type="date" id="diaFinImputacion" name="diaFinImputacion"></td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td>
+                <p class="pHorasImputadas"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p p class="pHorasPrevistas"></p>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <br>
+    <input type="submit" value="Calcular">
+</body>
+
+</html>
