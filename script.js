@@ -3,20 +3,18 @@ window.onload = function () {
     var inputHoras = document.getElementById('horasJornada');
     var inputCalendario = document.getElementById('diaFinImputacion');
     var botonCalcular = document.getElementById('botonCalcular');
+    var outputHorasImputadas = document.getElementById("pHorasImputadas");
+    var outputHorasPrevistas = document.getElementById("pHorasPrevistas");
+    var outputHorasTotales = document.getElementById("pHorasTotales");
 
     // Añadimos el listener
-    botonCalcular.addEventListener("click", mostrarFecha);
+    botonCalcular.addEventListener("click", calcularHoras);
 
-    // Definimos la función del Listener
-    function mostrarFecha() {
-        var diaSeleccionado = inputCalendario.value;
-        console.log(diaSeleccionado);
-    }
-
-    function calcularFecha() {
+    // La función del Listener
+    function calcularHoras() {
 
         // Obtener la fecha seleccionada del input
-        var fechaSeleccionada = new Date(inputFecha.value);
+        var fechaSeleccionada = new Date(inputCalendario.value);
 
         var diasRestantes = 0;
         var ultimoDiaMes = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth() + 1, 0).getDate();
@@ -30,7 +28,35 @@ window.onload = function () {
             }
         }
 
-        console.log("Días laborables restantes en el mes: " + diasRestantes);
+        var horasZZIMPEST = ((diasRestantes - 1) * inputHoras.value);
+
+        var diasHastaFecha = 0;
+        var primerDiaMes = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), 1);
+
+        var diffDias = Math.floor((fechaSeleccionada - primerDiaMes) / (1000 * 60 * 60 * 24));
+
+        for (var i = 0; i <= diffDias; i++) {
+            var dia = new Date(primerDiaMes);
+            dia.setDate(primerDiaMes.getDate() + i);
+            var diaSemana = dia.getDay();
+            if (diaSemana !== 0 && diaSemana !== 6) {
+                diasHastaFecha++;
+            }
+        }
+
+        var horasYaImputadas = ((diasHastaFecha - 1) * inputHoras.value);
+
+        var horasTotales = horasYaImputadas + horasZZIMPEST;
+
+        if (inputHoras < 0 || !inputCalendario.value) {
+            outputHorasImputadas.innerHTML = "Error";
+            outputHorasPrevistas.innerHTML = "Error";
+            outputHorasTotales.innerHTML = "Error";
+        } else {
+            outputHorasImputadas.innerHTML = horasYaImputadas;
+            outputHorasPrevistas.innerHTML = horasZZIMPEST;
+            outputHorasTotales.innerHTML = horasTotales;
+        }
 
     }
 

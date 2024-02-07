@@ -10,34 +10,58 @@
 </head>
 
 <body>
-    <h1>Asistente SIH</h1>
-    <table>
-        <tr>
-            <td><label for="horasJornada">¿De cuántas horas es tu jornada laboral?</label></td>
-            <td><input type="number" id="horasJornada" name="horasJornada" min="3" max="8" value="5"></td>
-        </tr>
-        <tr>
-            <td><label for="diaFinImputacion">¿Cuando acaba tu periodo de imputación?</label></td>
-            <td><input type="date" id="diaFinImputacion" name="diaFinImputacion"></td>
-        </tr>
-    </table>
-    <br>
+    <h1>Asistente de Imputación</h1>
     <table>
         <tr>
             <td>
-                <p class="pHorasImputadas"></p>
+                <label for="horasJornada">¿De cuántas horas es tu jornada laboral?</label>
+            </td>
+            <td>
+                <input type="number" id="horasJornada" name="horasJornada" min="3" max="8" value="5">
             </td>
         </tr>
         <tr>
             <td>
-                <p p class="pHorasPrevistas"></p>
+                <label for="diaFinImputacion">¿Cuando acaba tu periodo de imputación?</label>
+            </td>
+            <td>
+                <input type="date" id="diaFinImputacion" name="diaFinImputacion">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <button id="botonCalcular">Calcular</button>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <td>
+                <p>Horas imputadas</p>
+            </td>
+            <td>
+                <p id="pHorasImputadas">00</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Horas previstas a imputar</p>
+            </td>
+            <td>
+                <p id="pHorasPrevistas">00</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Total de horas</p>
+            </td>
+            <td>
+                <p id="pHorasTotales">00</p>
             </td>
         </tr>
     </table>
 
     <br>
     <br>
-    <button id="botonCalcular">Calcular</button>
 </body>
 
 </html>
