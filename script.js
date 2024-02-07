@@ -28,8 +28,6 @@ window.onload = function () {
             }
         }
 
-        var horasZZIMPEST = ((diasRestantes - 1) * inputHoras.value);
-
         var diasHastaFecha = 0;
         var primerDiaMes = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), 1);
 
@@ -44,8 +42,8 @@ window.onload = function () {
             }
         }
 
-        var horasYaImputadas = ((diasHastaFecha - 1) * inputHoras.value);
-
+        var horasYaImputadas = (diasHastaFecha * inputHoras.value);
+        var horasZZIMPEST = ((diasRestantes - 1) * inputHoras.value);
         var horasTotales = horasYaImputadas + horasZZIMPEST;
 
         if (inputHoras < 0 || !inputCalendario.value) {
