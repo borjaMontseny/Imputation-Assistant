@@ -1,6 +1,7 @@
 window.onload = function () {
     // Caputramos los elementos del HTML
     var inputHoras = document.getElementById('horasJornada');
+    var inputHorasVacaciones = document.getElementById('horasVacaciones');
     var inputCalendario = document.getElementById('diaFinImputacion');
     var botonCalcular = document.getElementById('botonCalcular');
     var outputHorasImputadas = document.getElementById("pHorasImputadas");
@@ -43,15 +44,15 @@ window.onload = function () {
         }
 
         var horasYaImputadas = (diasHastaFecha * inputHoras.value);
-        var horasZZIMPEST = ((diasRestantes - 1) * inputHoras.value);
-        var horasTotales = horasYaImputadas + horasZZIMPEST;
+        var horasZZIMPEST = (diasRestantes - 1) * inputHoras.value - inputHorasVacaciones.value;
+        var horasTotales = horasYaImputadas + (diasRestantes - 1) * inputHoras.value;
 
-        if (inputHoras < 0 || !inputCalendario.value) {
+        if (inputHoras < 0 || inputHorasVacaciones < 0 || !inputCalendario.value) {
             outputHorasImputadas.innerHTML = "Error";
             outputHorasPrevistas.innerHTML = "Error";
             outputHorasTotales.innerHTML = "Error";
         } else {
-            outputHorasImputadas.innerHTML = horasYaImputadas;
+            outputHorasImputadas.innerHTML = (horasYaImputadas + parseFloat(inputHorasVacaciones.value));
             outputHorasPrevistas.innerHTML = horasZZIMPEST;
             outputHorasTotales.innerHTML = horasTotales;
         }
