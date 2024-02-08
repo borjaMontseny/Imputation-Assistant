@@ -13,16 +13,19 @@ body {
 table {
     border-collapse: collapse;
     margin: 0 auto;
+    table-layout: fixed;
+    width: 55%;
 }
 
-td, th {
+td,
+th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
 tr:hover {
-    background-color: #f7cee3; /* Cambié el color de fondo al tono de magenta */
+    background-color: #f7cee3;
 }
 
 label {
@@ -35,26 +38,33 @@ input[type="date"] {
     width: 100%;
     padding: 5px;
     box-sizing: border-box;
-    border: 1px solid #a3126f; /* Magenta */
+    border: 1px solid #a3126f;
     border-radius: 5px;
     font-size: 16px;
-    background-color: #a3126f; /* Magenta */
+    background-color: #a3126f;
     color: white;
+    text-align: center;
 }
 
 button {
     font-family: 'JetBrains Mono', monospace;
     padding: 8px;
-    border: 1px solid #a3126f; /* Magenta */
+    border: 1px solid #a3126f;
     border-radius: 5px;
     font-size: 16px;
-    background-color: #a3126f; /* Magenta */
+    background-color: #a3126f;
     color: white;
     cursor: pointer;
-    width: 100%;
+    width: 15%;
+    display: block;
+    margin: 0 auto;
 }
 
 button:hover {
     font-weight: bold;
-    background-color: #8c0f59; /* Magenta más oscuro */
+    background-color: #8c0f59;
+}
+
+#tablaResultados td:nth-child(2) {
+    text-align: center;
 }
