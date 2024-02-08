@@ -1,5 +1,5 @@
 window.onload = function () {
-    // Caputramos los elementos del HTML
+    // Capturamos los elementos del HTML
     var inputHoras = document.getElementById('horasJornada');
     var inputHorasVacaciones = document.getElementById('horasVacaciones');
     var inputCalendario = document.getElementById('diaFinImputacion');
@@ -8,14 +8,23 @@ window.onload = function () {
     var outputHorasPrevistas = document.getElementById("pHorasPrevistas");
     var outputHorasTotales = document.getElementById("pHorasTotales");
 
+    // Días festivos que no cuentan
+    var disableDates = ['01-01-2024', '29-03-2024', '01-04-2024', '01-05-2024', '24-06-2024', '15-08-2024', '11-09-2024', '25-09-2024', '01-11-2024', '06-12-2024', '25-12-2024', '26-12-2024'];
+
     // Añadimos el listener
     botonCalcular.addEventListener("click", calcularHoras);
+
+    // Función para verificar si una fecha es un día festivo
+    function isHoliday(dateString) {
+        return disableDates.includes(dateString);
+    }
 
     // La función del Listener
     function calcularHoras() {
 
         // Obtener la fecha seleccionada del input
         var fechaSeleccionada = new Date(inputCalendario.value);
+        var dateString = fechaSeleccionada.getDate() + '-' + (fechaSeleccionada.getMonth() + 1) + '-' + fechaSeleccionada.getFullYear();
 
         var diasRestantes = 0;
         var ultimoDiaMes = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth() + 1, 0).getDate();
@@ -24,7 +33,9 @@ window.onload = function () {
         for (var i = fechaSeleccionada.getDate(); i <= ultimoDiaMes; i++) {
             var dia = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), i);
             var diaSemana = dia.getDay(); // 0 para domingo, 6 para sábado
-            if (diaSemana !== 0 && diaSemana !== 6) { // Excluir domingo (0) y sábado (6)
+            var dateString = dia.getDate() + '-' + (dia.getMonth() + 1) + '-' + dia.getFullYear();
+
+            if (diaSemana !== 0 && diaSemana !== 6 && !isHoliday(dateString)) { // Excluir domingo (0), sábado (6) y días festivos
                 diasRestantes++;
             }
         }
@@ -38,7 +49,9 @@ window.onload = function () {
             var dia = new Date(primerDiaMes);
             dia.setDate(primerDiaMes.getDate() + i);
             var diaSemana = dia.getDay();
-            if (diaSemana !== 0 && diaSemana !== 6) {
+            var dateString = dia.getDate() + '-' + (dia.getMonth() + 1) + '-' + dia.getFullYear();
+
+            if (diaSemana !== 0 && diaSemana !== 6 && !isHoliday(dateString)) {
                 diasHastaFecha++;
             }
         }
@@ -47,7 +60,7 @@ window.onload = function () {
         var horasZZIMPEST = (diasRestantes - 1) * inputHoras.value - inputHorasVacaciones.value;
         var horasTotales = horasYaImputadas + (diasRestantes - 1) * inputHoras.value;
 
-        if (inputHoras < 0 || inputHorasVacaciones < 0 || !inputCalendario.value) {
+        if (inputHoras.value < 0 || inputHorasVacaciones.value < 0 || !inputCalendario.value) {
             outputHorasImputadas.innerHTML = "Error";
             outputHorasPrevistas.innerHTML = "Error";
             outputHorasTotales.innerHTML = "Error";
@@ -56,7 +69,5 @@ window.onload = function () {
             outputHorasPrevistas.innerHTML = horasZZIMPEST;
             outputHorasTotales.innerHTML = horasTotales;
         }
-
     }
-
 }
